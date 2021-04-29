@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\Users;
 use App\Filters\AuthFilter;
+use Config\Service;
 
 class AuthController extends ResourceController
 {
@@ -16,6 +17,9 @@ class AuthController extends ResourceController
 
     public function login()
     {
+        $session = session();
+        $token = $session->get('token');
+        $exp = $session->get('exp');
         $users_Email      = $this->request->getPost('users_Email');
         $users_Password   = $this->request->getPost('users_Password');
  
@@ -34,7 +38,7 @@ class AuthController extends ResourceController
                 'message' => 'Berhasil login',
                 "token" => $token,
                 "users_Email" => $dataEncoded['users_Email'],
-                "expireAt" => $expire_claim
+                "expireAt" => $exp
             ];
             return $this->respond($output, 200);
         } else {

@@ -46,8 +46,10 @@ class AuthFilter extends BaseConfig
                 "exp" => $expire_claim,
                 "data" => $dataEncoded,
             );
- 
         $token = JWT::encode($token, $secret_key);
-        return $token;
+        $session = session();
+        $set_token = $session->set('token', $token);
+        $set_token2 = $session->set('exp', $expire_claim);
+        return $set_token;
     }
 }
