@@ -2,6 +2,9 @@
 
 namespace App\Filters;
 
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\Config\BaseConfig;
 use \Firebase\JWT\JWT;
 use App\Controllers\AuthController;
@@ -52,4 +55,14 @@ class AuthFilter extends BaseConfig
         $set_token2 = $session->set('exp', $expire_claim);
         return $set_token;
     }
+
+    public function before(RequestInterface $request)
+    {
+        //
+    }
+
+    // public function register()
+    // {
+        //
+    // }
 }

@@ -21,6 +21,7 @@ class Filters extends BaseConfig
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
         'AuthFilter' => \App\Filters\AuthFilter::class,
+        'auth' => \App\Filters\Auth::class,
     ];
 
     /**
@@ -33,6 +34,7 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             // 'csrf',
+            'auth',
         ],
         'after'  => [
             'toolbar',
